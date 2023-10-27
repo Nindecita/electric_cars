@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Editing car</h1>
+</div>
+<%= render "form", car: @car %>
+
+<br>
+<div class="container">
+  <%= link_to "Show this car", @car, class: "btn btn-primary mr-2" %>
+  <%= link_to "Back to cars", cars_path, class: "btn btn-secondary" %>
+</div>
+

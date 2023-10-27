@@ -1,0 +1,70 @@
+<p style="color: green"><%= notice %></p>
+<div class="container">
+<%= form_tag(cars_path, method: :get) do %>
+  <div class="input-group mb-3">
+    <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Buscar autos..." %>
+    <div class="input-group-append">
+      <%= submit_tag "Buscar", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+
+  <h1>Lista de Autos Eléctricos</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Modelo</th>
+        <th>Marca</th>
+        <th>Año de Fabricación</th>
+        <th>Imagen del Auto Eléctrico</th>
+        <th>Caracteristicas</th>
+        <th>Perfil</th>
+        <th>Editar</th>
+      </tr>
+    </thead>
+<tbody>
+  <% @electric_cars.each do |electric_car| %>
+    <tr>
+      <td><%= electric_car.model %></td>
+      <td><%= electric_car.brand %></td>
+      <td><%= electric_car.year %></td>
+      <td>
+        <% if electric_car.image_car.attached? %>
+          <%= image_tag electric_car.image_car, class: "img-thumbnail", alt: "Imagen del Auto Eléctrico" %>
+        <% else %>
+          <%= image_tag "default.jpg", class: "img-thumbnail", alt: "Imagen por defecto" %>
+        <% end %>
+      </td>
+      <td>
+        <% electric_car.characteristics.each do |characteristic| %>
+          <span class="badge badge-warning text-dark"><%= characteristic.name %></span>
+        <% end %>
+      <td>
+        <% if current_user.role == "client" %>
+          <%= link_to "Ver Perfil", car_path(electric_car), class: "btn btn-primary" %>
+        <% else %>
+          <p>Debes ser un cliente para ver el perfil</p>
+        <% end %>
+      </td>
+      <td>
+        <% if current_user.role == "administrator" %>
+          <%= link_to "Editar", edit_car_path(electric_car), class: "btn btn-warning" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+
+  </table>
+  <div class="d-flex justify-content-center align-items-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+  <%if current_user.role == "administrator"%>
+    <%= link_to "New car", new_car_path, class: "btn btn-primary" %>
+  <%end%>
+</div>
+
+
+

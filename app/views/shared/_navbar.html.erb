@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Inicio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= terms_and_conditions_index_path %>">Términos y Condiciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= about_index_path %>">Acerca de Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <% if user_signed_in? %>
+                        <a class="nav-link" href="<%= destroy_user_session_path %>" method="delete" rel="nofollow">Cerrar Sesión</a>
+                    <% else %>
+                        <a class="nav-link" href="<%= new_user_session_path %>">Iniciar Sesión</a>
+                    <% end %>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= new_user_registration_path %>">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

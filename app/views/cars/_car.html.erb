@@ -1,0 +1,40 @@
+<div class="container">
+  <div id="<%= dom_id car %>" class="card mb-3">
+    <div class="card-img-top">
+      <% if car.image_car.attached? %>
+        <%= image_tag car.image_car, class: "img-thumbnail", alt: "Imagen del Auto Eléctrico" %>
+      <% else %>
+        <%= image_tag "default.jpg", class: "img-thumbnail", alt: "Imagen por defecto" %>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Car Information</h5>
+      <p class="card-text">
+        <strong>Model:</strong>
+        <%= car.model %>
+      </p>
+      <p class="card-text">
+        <strong>Brand:</strong>
+        <%= car.brand %>
+      </p>
+      <p class="card-text">
+        <strong>Year:</strong>
+        <%= car.year %>
+      </p>
+      <p class="card-text">
+        <strong>Autonomy:</strong>
+        <%= car.autonomy %> km
+      </p>
+      <p class="card-text">
+        <strong>Rental Price:</strong>
+        $<%= car.rental_price %> per day
+      </p>
+      <p class="card-text">
+        <strong>characteristics:</strong>
+        <% car.characteristics.each do |characteristic| %>
+          <span class="badge badge-warning text-dark"><%= characteristic.name %></span>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
